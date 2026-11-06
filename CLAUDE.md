@@ -166,4 +166,4 @@ Not currently used. To enable, uncomment both the `accessTransformers` line in `
 
 ## CI
 
-`.github/workflows/build.yml` runs `./gradlew build` on every push and PR with Temurin JDK 21. Keep the build green — no separate lint step exists, so compile + test is the full gate.
+`.github/workflows/build.yml` runs `./gradlew build` with Temurin JDK 21 on pushes to `main` and on PRs, then boot-checks the built jar on a dedicated server (`.github/boot-check.sh`). PRs also run a control leg that expects the upstream 0.1.0 jar to fail the boot check; pushes to `main` publish the jar to GHCR. Keep the build green — no separate lint step exists, so compile + test is the full gate.
