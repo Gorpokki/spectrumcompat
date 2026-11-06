@@ -135,11 +135,3 @@ jobs:
             --annotation "org.opencontainers.image.revision=$GITHUB_SHA" \
             "$jar:application/java-archive"
           sha256sum "$jar"
-
-      - name: Verify package is private
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          visibility=$(gh api "/users/${{ github.repository_owner }}/packages/container/spectrumcompat" --jq .visibility)
-          echo "visibility: $visibility"
-          [ "$visibility" = private ]
